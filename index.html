@@ -4,109 +4,941 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arnab Singha Portfolio</title>
+    <title>Arnab Singha - Enhanced Portfolio</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <style>
-        .navbar-nav .nav-link {
-            transition: color 0.3s ease-in-out, transform 0.2s ease-in-out;
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary-gradient: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+            --secondary-gradient: linear-gradient(135deg, #1abc9c 0%, #16a085 100%);
+            --accent-gradient: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            --neon-blue: #2ecc71;
+            --neon-purple: #27ae60;
+            --neon-green: #1abc9c;
+            --neon-pink: #16a085;
+            --dark-bg: #0a1927;
+            --darker-bg: #051016;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-primary: #ffffff;
+            --text-secondary: #b8d5c6;
+            --glow-color: rgba(46, 204, 113, 0.4);
+            --matrix-green: #27ae60;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--darker-bg);
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(46, 204, 113, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(39, 174, 96, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(26, 188, 156, 0.06) 0%, transparent 50%);
+            min-height: 100vh;
+            color: var(--text-primary);
+            overflow-x: hidden;
+            position: relative;
         }
 
-        .navbar-nav .nav-link:hover {
-            color: #ffffff !important;
-            transform: scale(1.1);
+        /* Matrix Rain Effect - Enhanced visibility */
+        .matrix-rain {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            overflow: hidden;
+            opacity: 0.25;
+            z-index: -1;
         }
 
-        .btn-success:hover {
-            background-color: white;
-            color: green;
+        .matrix-char {
+            position: absolute;
+            color: var(--matrix-green);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 18px;
+            font-weight: 600;
+            animation: matrixFall linear infinite;
+            opacity: 0.95;
+            text-shadow: 0 0 10px rgba(46, 204, 113, 0.95);
         }
 
-        .social-icons .nav-link {
-            font-size: 24px;
-            color: #333 !important;
-            margin: 0 10px;
+        @keyframes matrixFall {
+            0% { transform: translateY(-100vh); opacity: 0; }
+            10% { opacity: 1; }
+            90% { opacity: 1; }
+            100% { transform: translateY(100vh); opacity: 0; }
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            background: rgba(10, 25, 39, 0.95) !important;
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--glass-border);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
             transition: all 0.3s ease;
         }
-
-        .social-icons .nav-link:hover {
-            color: #4dd74b !important;
-            transform: scale(1.2);
+        
+        .navbar-brand {
+            font-weight: 800;
+            font-size: 1.8rem !important;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            font-family: 'JetBrains Mono', monospace;
         }
-
-        .cl-bld{
-            font-weight: bold;
+        
+        .navbar-brand::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-gradient);
+            transition: width 0.3s ease;
         }
-        .card-body{
-            min-height: 150px;
+        
+        .navbar-brand:hover::after {
+            width: 100%;
         }
-        .card{
-            padding-bottom: 15px;
+        
+        /* Glass Card Styling */
+        .glass-card {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
         }
-        .link{
-            color: black;
-            text-decoration: none;
+        
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.5s ease;
         }
-        .link:hover{
-            border: 1px solid #198754;
+        
+        .glass-card:hover::before {
+            left: 100%;
+        }
+        
+        .glass-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(46, 204, 113, 0.2);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        /* Hero Section */
+        .hero-section {
+            padding: 120px 0 80px;
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+        
+        .hero-image {
+            width: 280px;
+            height: 280px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid transparent;
+            background: var(--primary-gradient);
             padding: 4px;
-            border-radius: 5px;
-            background-color: #198754;
-            color: white;
-            transition: color 0.3s ease;
+            transition: all 0.5s ease;
+            position: relative;
         }
+        
+        .hero-image:hover {
+            transform: scale(1.05) rotate(5deg);
+            box-shadow: 0 0 50px var(--glow-color);
+        }
+        
+        .hero-content h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.2;
+        }
+        
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+        
+        /* Buttons */
+        .btn-gradient {
+            background: var(--primary-gradient);
+            border: none;
+            border-radius: 50px;
+            padding: 12px 30px;
+            font-weight: 600;
+            color: white;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-gradient::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .btn-gradient:hover::before {
+            left: 100%;
+        }
+        
+        .btn-gradient:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(46, 204, 113, 0.4);
+            color: white;
+        }
+        
+        .btn-outline-gradient {
+            background: transparent;
+            border: 2px solid;
+            border-image: var(--primary-gradient) 1;
+            border-radius: 50px;
+            padding: 10px 28px;
+            font-weight: 600;
+            color: var(--text-primary);
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-outline-gradient:hover {
+            background: var(--primary-gradient);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px rgba(46, 204, 113, 0.4);
+        }
+        
+        /* Section Headers */
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+        
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+        }
+        
+        .section-header::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--accent-gradient);
+            border-radius: 2px;
+        }
+        
+        /* Education Cards */
+        .education-card {
+            height: 100%;
+            transition: all 0.4s ease;
+        }
+        
+        .education-card .card-img-top {
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+        
+        .education-card:hover .card-img-top {
+            transform: scale(1.1);
+        }
+        
+        .education-card .card-body {
+            padding: 1.5rem;
+        }
+        
+        .education-card .card-title {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+        
+        .education-card .card-text {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+        
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+        }
+        
+        .skill-item {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .skill-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: var(--accent-gradient);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+        }
+        
+        .skill-item:hover::before {
+            transform: scaleY(1);
+        }
+        
+        .skill-item:hover {
+            transform: translateX(10px);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .skill-item h5 {
+            color: var(--text-primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        /* Projects Grid - Enhanced with 3D flip animation */
+        .tech-projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+            perspective: 1500px;
+        }
+
+        .tech-project-card {
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            padding: 1.5rem;
+            position: relative;
+            overflow: hidden;
+            min-height: 200px;
+            transform-style: preserve-3d;
+            transform: translateZ(0) rotateX(0) rotateY(0);
+            transition: transform 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275), 
+                        box-shadow 0.6s ease, 
+                        border-color 0.4s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            opacity: 0;
+            animation: cardEntrance 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+            transform-origin: center;
+        }
+
+        /* Staggered entrance animation */
+        .tech-project-card:nth-child(1) { animation-delay: 0.1s; }
+        .tech-project-card:nth-child(2) { animation-delay: 0.2s; }
+        .tech-project-card:nth-child(3) { animation-delay: 0.3s; }
+        .tech-project-card:nth-child(4) { animation-delay: 0.4s; }
+        .tech-project-card:nth-child(5) { animation-delay: 0.5s; }
+        .tech-project-card:nth-child(6) { animation-delay: 0.6s; }
+
+        @keyframes cardEntrance {
+            0% {
+                opacity: 0;
+                transform: translateZ(0) rotateX(20deg) rotateY(20deg) translateY(50px);
+                box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            }
+            100% {
+                opacity: 1;
+                transform: translateZ(0) rotateX(0) rotateY(0) translateY(0);
+                box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+            }
+        }
+
+        /* Enhanced hover effect */
+        .tech-project-card:hover {
+            transform: translateZ(30px) rotateX(-5deg) rotateY(5deg) scale(1.03);
+            box-shadow: 0 25px 50px rgba(46, 204, 113, 0.4),
+                        0 0 80px rgba(46, 204, 113, 0.2),
+                        0 0 0 2px rgba(46, 204, 113, 0.2) inset;
+            border-color: rgba(46, 204, 113, 0.5);
+            z-index: 10;
+        }
+
+        .tech-project-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, 
+                        rgba(46, 204, 113, 0.2) 0%, 
+                        transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .tech-project-card:hover::before {
+            opacity: 1;
+        }
+
+        .project-status {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            font-family: 'JetBrains Mono', monospace;
+            padding: 5px 12px;
+            border-radius: 20px;
+            background: rgba(46, 204, 113, 0.2);
+            border: 1px solid rgba(46, 204, 113, 0.3);
+            transform: translateZ(10px);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .tech-project-card:hover .project-status {
+            transform: translateZ(40px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-status.completed {
+            background: rgba(46, 204, 113, 0.2);
+            color: var(--neon-green);
+        }
+
+        .project-status.ongoing {
+            background: rgba(52, 152, 219, 0.2);
+            color: var(--neon-blue);
+        }
+
+        .status-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            animation: statusPulse 2s ease-in-out infinite;
+        }
+
+        .status-completed {
+            background: var(--neon-green);
+        }
+
+        .status-ongoing {
+            background: var(--neon-blue);
+        }
+
+        @keyframes statusPulse {
+            0%, 100% { 
+                opacity: 1; 
+                transform: scale(1); 
+                box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.7);
+            }
+            50% { 
+                opacity: 0.8; 
+                transform: scale(1.2); 
+            }
+            70% {
+                box-shadow: 0 0 0 6px rgba(46, 204, 113, 0);
+            }
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            font-family: 'JetBrains Mono', monospace;
+            padding-right: 100px;
+            transition: all 0.3s ease;
+            display: block;
+            transform: translateZ(5px);
+        }
+        
+        .project-title:hover {
+            color: var(--neon-green);
+            transform: translateZ(5px) translateX(5px);
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            font-size: 0.95rem;
+            transform: translateZ(5px);
+        }
+        
+        /* Contact Section */
+        .contact-section {
+            position: relative;
+            padding: 4rem 0;
+        }
+        
+        .contact-info {
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 20px;
+            padding: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: center;
+            padding: 1rem;
+            transition: all 0.3s ease;
+            border-radius: 10px;
+        }
+        
+        .contact-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+            transform: translateX(10px);
+        }
+        
+        .contact-item i {
+            font-size: 1.5rem;
+            margin-right: 1rem;
+            background: var(--accent-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        /* Social Icons */
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+        
+        .social-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--card-bg);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .social-icon::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-gradient);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 50%;
+        }
+        
+        .social-icon:hover::before {
+            opacity: 1;
+        }
+        
+        .social-icon:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 15px 30px var(--glow-color);
+            color: white;
+        }
+        
+        .social-icon i {
+            position: relative;
+            z-index: 1;
+        }
+        
+        /* Footer */
+        footer {
+            background: rgba(10, 25, 39, 0.8);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid var(--glass-border);
+            padding: 2rem 0;
+            text-align: center;
+            color: var(--text-secondary);
+        }
+        
+        /* Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .stagger-1 { animation-delay: 0.1s; }
+        .stagger-2 { animation-delay: 0.2s; }
+        .stagger-3 { animation-delay: 0.3s; }
+        .stagger-4 { animation-delay: 0.4s; }
+        
+        /* Floating Animation */
+        .floating {
+            animation: floating 6s ease-in-out infinite;
+        }
+        
+        @keyframes floating {
+            0%, 100% { transform: translate(0, 0px); }
+            50% { transform: translate(0, -20px); }
+        }
+        
+        /* Tech Section Header Enhanced */
+        .tech-section-header {
+            text-align: center;
+            margin-bottom: 3rem;
+            position: relative;
+            padding: 1.5rem 0;
+        }
+
+        .tech-section-header h2 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            font-family: 'JetBrains Mono', monospace;
+            background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple), var(--neon-green));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            position: relative;
+            display: inline-block;
+            animation: textGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes textGlow {
+            0% { text-shadow: 0 0 10px var(--neon-blue); }
+            50% { text-shadow: 0 0 20px var(--neon-purple); }
+            100% { text-shadow: 0 0 15px var(--neon-green); }
+        }
+
+        .tech-section-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+            animation: scanLine 2s ease-in-out infinite;
+        }
+
+        @keyframes scanLine {
+            0%, 100% { opacity: 0; width: 0; }
+            50% { opacity: 1; width: 200px; }
+        }
+
+        /* Desktop modal size */
+        .project-modal .custom-modal {
+            width: 800px;
+            max-width: 800px;
+            height: 600px;
+            max-height: 600px;
+            margin: auto;
+        }
+
+        /* Modal content structure */
+        .project-modal .modal-content {
+            height: 100%;
+            background: var(--darker-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 15px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .project-modal .modal-header {
+            height: 60px;
+            border-bottom: 1px solid var(--glass-border);
+            padding: 0 1rem;
+            align-items: center;
+        }
+
+        /* Title styling */
+        .project-modal .modal-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Modal body takes up remaining height */
+        .project-modal .modal-body {
+            height: calc(100% - 60px);
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Video scaling */
+        .project-modal video {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            border-radius: 0 0 15px 15px;
+        }
+
+        /* Close button color */
+        .project-modal .btn-close {
+            filter: brightness(0) invert(1);
+        }
+
+        /* --- Responsive styles for small screens --- */
+        @media (max-width: 767px) {
+            .project-modal .custom-modal {
+                width: 90vw;
+                height: 60vh;
+            }
+
+            .project-modal .modal-header {
+                height: 50px;
+            }
+
+            .project-modal .modal-body {
+                height: calc(100% - 50px);
+            }
+        }
+
+
+
+        /* Responsive Design - Enhanced for Mobile */
+        @media (max-width: 992px) {
+            .hero-content h1 {
+                font-size: 2.8rem;
+            }
+            
+            .tech-section-header h2 {
+                font-size: 2.2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero-section {
+                padding: 100px 0 40px;
+                text-align: center;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.3rem;
+            }
+            
+            .hero-image {
+                width: 220px;
+                height: 220px;
+                margin: 0 auto 2rem;
+            }
+            
+            .tech-section-header h2 {
+                font-size: 2rem;
+            }
+            
+            .tech-section-header::before {
+                width: 100px;
+            }
+            
+            .education-card .card-img-top {
+                height: 180px;
+            }
+            
+            .contact-item {
+                font-size: 0.95rem;
+            }
+            
+            .social-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+            }
+            
+            .matrix-char {
+                font-size: 16px;
+            }
+            
+            .hero-content .d-flex {
+                justify-content: center;
+            }
+
+            .tech-projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .navbar-brand {
+                font-size: 1.5rem !important;
+            }
+            
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-content p {
+                font-size: 1rem;
+                padding: 0 10px;
+            }
+            
+            .tech-section-header h2 {
+                font-size: 1.8rem;
+            }
+            
+            .project-title {
+                font-size: 1.2rem;
+                padding-right: 0;
+            }
+            
+            .project-description {
+                font-size: 0.9rem;
+            }
+            
+            .btn-gradient, .btn-outline-gradient {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+            
+            .tech-projects-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .project-status {
+                top: 10px;
+                right: 10px;
+                font-size: 0.75rem;
+                padding: 4px 10px;
+            }
+        }
+
     </style>
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg" data-bs-theme="dark" style="background-color: #198754;">
+    <div class="matrix-rain" id="matrixRain"></div>
+    <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-            <a class="navbar-brand mx-2" href="#" style="font-size: 25px;">Arnab Singha</a>
+            <a class="navbar-brand mx-2" href="#">Arnab Singha</a>
         </div>
     </nav>
-    <div class="container">
-        <div class="card mb-3 my-5" style="max-width: 100%; margin: auto;">
-            <div class="row g-0">
-                <div class="col-md-4">
-                    <img src="resource/port.jpg" class="img-fluid rounded-start" alt="Arnab Singha">
+    <!-- Hero Section -->
+    <section class="hero-section" id="about">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-4 text-center mb-4 mb-lg-0">
+                    <div class="floating">
+                        <img src="resource/port.jpg" class="hero-image" alt="Arnab Singha">
+                    </div>
                 </div>
-                <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title" style="font-size: 30px;">Hi! Arnab Here</h5>
-                        <p class="card-text my-3" style="font-size: 18px;">
-                            I'm an M.Sc. Computer Science student at RKMVERI, Belur, and a passionate tech enthusiast from Midnapore, West Bengal. My expertise spans web development, machine learning, computer vision, DBMS and SQL, Arduino and IoT, with a keen interest in computer hardware, system-level technologies, robotics, cybersecurity, and ethical hacking. I love exploring how software and hardware interact to create innovative solutions. Whether it's building intelligent systems, enhancing security, or diving into embedded tech, I’m always eager to push the boundaries of technology and keep learning.
+                <div class="col-lg-8">
+                    <div class="hero-content fade-in stagger-1">
+                        <h1>Hi! Arnab Here</h1>
+                        <p>
+                            I'm an M.Sc. Computer Science student at RKMVERI, Belur, and a passionate tech enthusiast from Midnapore, West Bengal. My expertise spans web development, machine learning, computer vision, DBMS and SQL, Arduino and IoT, with a keen interest in computer hardware, system-level technologies, robotics, cybersecurity, and ethical hacking. I love exploring how software and hardware interact to create innovative solutions. Whether it's building intelligent systems, enhancing security, or diving into embedded tech, I'm always eager to push the boundaries of technology and keep learning.
                         </p>
-                        <a class="btn btn-success my-4 mx-2" href="mailto:arnabsingha200228@gmail.com" role="button">Send me Email</a>
-                        <button type="button" class="btn btn-outline-success my-4 disabled">Get my CV</button>
+                        <div class="d-flex gap-3 flex-wrap">
+                            <a class="btn-gradient" href="mailto:arnabsingha200228@gmail.com">Send me Email</a>
+                            <a class="btn-gradient" href="resource/resume.pdf" target="_blank">Get my CV</a>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="container">
-        <div class="card">
-            <div class="card-header" style="font-size:25px;background-color: #198754; color: white;">
-                My Education
+    </section>
+    <!-- Education Section -->
+    <section class="py-5" id="education">
+        <div class="container">
+            <div class="tech-section-header fade-in">
+                <h2>&lt;MY_EDUCATION&gt;</h2>
             </div>
-            <div class="row row-cols-1 row-cols-md-3 g-4 my-1 mx-2">
-                <div class="col">
-                    <div class="card">
-                        <img src="resource/veri.jpg" class="card-img-top" alt="...">
+            <div class="row g-4">
+                <div class="col-md-6 col-lg-4 fade-in stagger-1">
+                    <div class="glass-card education-card">
+                        <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="RKMVERI">
                         <div class="card-body">
                             <h5 class="card-title">
                                 Ramakrishna Mission Vivekananda Educational and Research Institute
                             </h5>
                             <p class="card-text">
-                                Currenty persuing MSc in Computer Science.
+                                Currently pursuing MSc in Computer Science.
                             </p>
-                            <p class="d-inline-flex gap-1">
-                                <a class="btn btn-success" data-bs-toggle="collapse" href="#collapse1" role="button" aria-expanded="false" aria-controls="collapse1">
-                                    Courses Taken
-                                </a>
-                            </p>
+                            <button class="btn-gradient" data-bs-toggle="collapse" data-bs-target="#collapse1">
+                                Courses Taken
+                            </button>
                             <div class="collapse" id="collapse1">
-                                <div class="card card-body" style="background-color:rgba(25, 244, 84, 0.2);">
+                                <div class="card-body">
                                     <ul>
                                         <li>Linear Algebra and Matrix Computation</li>
                                         <li>Probability and Stochastic Processes</li>
@@ -125,26 +957,24 @@
                         </div>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="card">
-                        <img src="resource/mid.jpg" class="card-img-top" alt="...">
+                <div class="col-md-6 col-lg-4 fade-in stagger-2">
+                    <div class="glass-card education-card">
+                        <img src="https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="Midnapore College">
                         <div class="card-body">
                             <h5 class="card-title">Midnapore College (Autonomous)</h5>
                             <p class="card-text">
                                 Completed BSc (Hons) in Computer Science in July 2024 with overall 8.19 CGPA.
                             </p>
-                            <p class="d-inline-flex gap-1">
-                                <a class="btn btn-success mt-3" data-bs-toggle="collapse" href="#collapse2" role="button" aria-expanded="false" aria-controls="collapse2">
-                                    Courses Taken
-                                </a>
-                            </p>
+                            <button class="btn-gradient mt-3" data-bs-toggle="collapse" data-bs-target="#collapse2">
+                                Courses Taken
+                            </button>
                             <div class="collapse" id="collapse2">
-                                <div class="card card-body" style="background-color:rgba(25, 244, 84, 0.2);">
+                                <div class="card-body">
                                     <ul>
                                         <li>Digital electronics and computer fundamentals</li>
                                         <li>Computer Architecture and organisation</li>
-                                        <li>Programing in C and C++</li>
-                                        <li>Programing in Java</li>
+                                        <li>Programming in C and C++</li>
+                                        <li>Programming in Java</li>
                                         <li>Discrete Mathematics and Graph Theory</li>
                                         <li>Operating System</li>
                                         <li>Data Structures</li>
@@ -165,9 +995,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="card" style="min-height: 342px;">
-                        <img src="resource/coll.jpg" class="card-img-top" alt="...">
+                <div class="col-md-6 col-lg-4 fade-in stagger-3">
+                    <div class="glass-card education-card">
+                        <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="Midnapore Collegiate School">
                         <div class="card-body">
                             <h5 class="card-title">Midnapore Collegiate School</h5>
                             <p class="card-text">
@@ -178,182 +1008,308 @@
                 </div>
             </div>
         </div>
-    </div>
-    <div class="container my-3">
-        <div class="card">
-            <div class="card-header" style="font-size:25px;background-color: #198754; color: white;">
-                Skills I have
+    </section>
+    <!-- Skills Section -->
+    <section class="py-5" id="skills">
+        <div class="container">
+            <div class="tech-section-header fade-in">
+                <h2>&lt;SKILLS_ACQUIRED&gt;</h2>
             </div>
-            <ul class="list-group list-group-flush mx-3">
-                <li class="list-group-item cl-bld mt-2">Programming in C, C++, C#, Java, Python</li>
-                <li class="list-group-item cl-bld">Web technologies like HTML, CSS, JavaScript, VBScript, Node.js, Express.js, Servlet, JSP, PHP, Flask, Streamlit</li>
-                <li class="list-group-item cl-bld">Data Structures and Algorithms</li>
-                <li class="list-group-item cl-bld">Database Management System and SQL</li>
-                <li class="list-group-item cl-bld">Software Project Management</li>
-                <li class="list-group-item cl-bld">Computer Graphics and Image Processing</li>
-                <li class="list-group-item cl-bld">Machine Learning and Computer Vision</li>
-                <li class="list-group-item cl-bld">Computer Hardware</li>
-                <li class="list-group-item cl-bld">Large Language Models and RAG</li>
-                <li class="list-group-item cl-bld">Arduino and IoT</li>
-            </ul>
-        </div>
-    </div>
-    <div class="container">
-        <div class="card">
-            <div class="card-header" style="font-size:25px;background-color: #198754; color: white;">
-                My Projects
-            </div>
-            <div class="row row-cols-1 row-cols-md-2 g-4 my-1 mx-1">
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title"><a href="https://neutronbot.streamlit.app/" target="_blank" class="link">Chatbot : Neutron</a></h5>
-                            <p class="card-text">A LLM powered simple chatbot for your general purpose queries.</p>
-                        </div>
-                    </div>
+            <div class="skills-grid fade-in">
+                <div class="skill-item stagger-1">
+                    <h5>Programming Languages</h5>
+                    <p>Programming in C, C++, C#, Java, Python</p>
                 </div>
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title"><a href="#" class="link">Exam Management System</a></h5>
-                            <p class="card-text">A basic exam management system with account facility, schedule, notice and results. Inbuild MCQ question and answering system with answer checking facility on the go.</p>
-                        </div>
-                    </div>
+                <div class="skill-item stagger-2">
+                    <h5>Web Technologies</h5>
+                    <p>HTML, CSS, JavaScript, VBScript, Node.js, Express.js, Servlet, JSP, PHP, Flask, Streamlit</p>
                 </div>
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title"><a href="https://github.com/ArnabSingha200228/Basic_Text_Editor" target="_blank" class="link">Basic Text Editor</a></h5>
-                            <p class="card-text">A basic text editor app made with java swing and AWT.</p>
-                        </div>
-                    </div>
+                <div class="skill-item stagger-3">
+                    <h5>Data Structures & Algorithms</h5>
+                    <p>Array, Stack, Queue, Linked List,Tree, Graph, Hashing, Heap, Sorting (Mergesort, Quicksort, Heapsort, Radixsort etc.), Searching, Asymptotic Analysis,
+                        Graph Algorithms (Graph traversal, shortest path etc), Randomized Algorithms, Greedy Methods,
+                        Dynamic Programming</p>
                 </div>
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title"><a href="https://arnabsingha200228.github.io/PhoneBook_Frontend/" target="_blank" class="link">Phone Book</a></h5>
-                            <p class="card-text">A simple HTML, CSS, JS app for saving contacts of people.</p>
-                        </div>
-                    </div>
+                <div class="skill-item stagger-4">
+                    <h5>Database Management</h5>
+                    <p>Database Management System and SQL</p>
                 </div>
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title"><a href="#" class="link" data-bs-toggle="modal" data-bs-target="#videoModal_edge">Edge Detecting Car</a></h5>
-                            <p class="card-text">An Arduino powered bot that can detect edges of a higher surface and can travel on that without falling down.</p>
-                        </div>
-                        <!-- Video Popup Modal -->
-                        <div class="modal fade" id="videoModal_edge" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="videoModalLabel">Edge Detecting Car</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="ratio ratio-16x9">
-                                            <video id="popupVideo_edge" autoplay muted controls controlslist="nodownload nofullscreen noplaybackrate noremoteplayback" disablePictureInPicture>
-                                                <source src="resource/edge.mp4" type="video/mp4">
-                                                Your browser does not support the video tag.
-                                            </video>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="skill-item stagger-1">
+                    <h5>Project Management</h5>
+                    <p>Software Project Management</p>
                 </div>
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title"><a href="#" class="link" data-bs-toggle="modal" data-bs-target="#videoModal_arm">Robotic Arm</a></h5>
-                            <p class="card-text">A robotic arm powered by Arduino that can move small things between places, staying stationary.</p>
-                        </div>
-                        <!-- Video Popup Modal -->
-                        <div class="modal fade" id="videoModal_arm" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
-                            <div class="modal-dialog modal-lg">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h5 class="modal-title" id="videoModalLabel">Robotic Arm</h5>
-                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <div class="ratio ratio-16x9">
-                                            <video id="popupVideo_arm" autoplay muted controls controlslist="nodownload nofullscreen noplaybackrate noremoteplayback" disablePictureInPicture>
-                                                <source src="resource/arm.mp4" type="video/mp4">
-                                                Your browser does not support the video tag.
-                                            </video>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div class="skill-item stagger-2">
+                    <h5>Graphics & Vision</h5>
+                    <p>Computer Graphics and Image Processing</p>
                 </div>
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title"><a href="https://github.com/ArnabSingha200228/document-scanner" target="_blank" class="link">Document Scanner</a></h5>
-                            <p class="card-text">A simple document scanner application written in python using open-cv and some principles of computer vision.</p>
-                        </div>
-                    </div>
+                <div class="skill-item stagger-3">
+                    <h5>AI & Machine Learning</h5>
+                    <p>Machine Learning, Computer Vision, Large Language Models and RAG</p>
                 </div>
-
-                <div class="col">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title"><a href="https://github.com/ArnabSingha200228/YOLO_RPI_KAFKA" target="_blank" class="link">YOLO in IoT and Kafka</a></h5>
-                            <p class="card-text">Object detection using YOLO in a Qemu emulated Raspberry pi and sending the detected images to remote machine through Kafka.</p>
-                        </div>
-                    </div>
+                <div class="skill-item stagger-4">
+                    <h5>Computer Hardware</h5>
+                    <p>Basic Digital Electronics, Computer Architecture, Microprocessor</p>
+                </div>
+                <div class="skill-item stagger-2">
+                    <h5>IoT & Embedded</h5>
+                    <p>Arduino and IoT</p>
                 </div>
             </div>
         </div>
-    </div>
-    <div class="container mt-3">
-        <div class="card">
-            <div class="card-header" style="font-size:25px;background-color: #198754; color: white;">
-                Connect with Me
+    </section>
+    <!-- Projects Section -->
+    <section class="py-5" id="projects" style="min-height: 100vh; display: flex; align-items: center;">
+        <div class="container">
+            <div class="tech-section-header fade-in">
+                <h2>&lt;MY_PROJECTS&gt;</h2>
             </div>
-            <ul class="list-group list-group-flush mx-3">
-                <li class="list-group-item mt-2">📧 arnabsingha200228@gmail.com</li>
-                <li class="list-group-item">📞 +918159942638</li>
-            </ul>
-            <div class="social-icons d-flex justify-content-center mt-3">
-                <a href="https://github.com/ArnabSingha200228/" target="_blank" class="nav-link">
-                    <i class="bi bi-github"></i>
-                </a>
-                <a href="https://www.linkedin.com/in/arnab-singha-66934b235" target="_blank" class="nav-link">
-                    <i class="bi bi-linkedin"></i>
-                </a>
-                <a href="https://instagram.com/arnab__s" target="_blank" class="nav-link">
-                    <i class="bi bi-instagram"></i>
-                </a>
-                <a href="https://www.facebook.com/share/14hmkNvVg1/" target="_blank" class="nav-link">
-                    <i class="bi bi-facebook"></i>
-                </a>
+            <div class="tech-projects-grid">
+                <!-- Neutron Chatbot -->
+                <div class="tech-project-card" data-tech="ai">
+                    <div class="project-status completed">
+                        <div class="status-indicator status-completed"></div>
+                        <span>COMPLETED</span>
+                    </div>
+                    <a href="https://neutronbot.streamlit.app/" target="_blank" class="project-title">Chatbot : Neutron</a>
+                    <p class="project-description">
+                        A LLM powered simple chatbot for your general purpose queries.
+                    </p>
+                </div>
+                <!-- Exam Management System -->
+                <div class="tech-project-card" data-tech="web">
+                    <div class="project-status completed">
+                        <div class="status-indicator status-completed"></div>
+                        <span>COMPLETED</span>
+                    </div>
+                    <a href="#" target="_blank" class="project-title">Exam Management System</a>
+                    <p class="project-description">
+                        A basic exam management system with account facility, schedule, notice and results. Inbuild MCQ question and answering system with answer checking facility on the go.
+                    </p>
+                </div>
+                <!-- Text Editor -->
+                <div class="tech-project-card" data-tech="java">
+                    <div class="project-status completed">
+                        <div class="status-indicator status-completed"></div>
+                        <span>COMPLETED</span>
+                    </div>
+                    <a href="https://github.com/ArnabSingha200228/Basic_Text_Editor" target="_blank" class="project-title">Basic Text Editor</a>
+                    <p class="project-description">
+                        A basic text editor app made with java swing and AWT.
+                    </p>
+                </div>
+                <!-- Phone Book -->
+                <div class="tech-project-card" data-tech="web">
+                    <div class="project-status completed">
+                        <div class="status-indicator status-completed"></div>
+                        <span>COMPLETED</span>
+                    </div>
+                    <a href="https://arnabsingha200228.github.io/PhoneBook_Frontend/" target="_blank" class="project-title">Phone Book</a>
+                    <p class="project-description">
+                        A simple HTML, CSS, JS app for saving contacts of people.
+                    </p>
+                </div>
+                <!-- Edge Detecting Car -->
+                <div class="tech-project-card" data-tech="iot">
+                    <div class="project-status completed">
+                        <div class="status-indicator status-completed"></div>
+                        <span>COMPLETED</span>
+                    </div>
+                    <a href="#" target="_blank" class="project-title" data-bs-toggle="modal" data-bs-target="#edgebotModal">Edge Detecting Car</a>
+                    <p class="project-description">
+                        An Arduino powered bot that can detect edges of a higher surface and can travel on that without falling down.
+                    </p>
+                </div>
+                <!-- Robotic Arm -->
+                <div class="tech-project-card" data-tech="robotics">
+                    <div class="project-status completed">
+                        <div class="status-indicator status-completed"></div>
+                        <span>COMPLETED</span>
+                    </div>
+                    <a href="#" target="_blank" class="project-title" data-bs-toggle="modal" data-bs-target="#flexiarmModal">Robotic Arm</a>
+                    <p class="project-description">
+                        A robotic arm powered by Arduino that can move small things between places, staying stationary.
+                    </p>
+                </div>
+                <div class="tech-project-card" data-tech="web">
+                    <div class="project-status completed">
+                        <div class="status-indicator status-completed"></div>
+                        <span>COMPLETED</span>
+                    </div>
+                    <a href="https://github.com/ArnabSingha200228/document-scanner" target="_blank" class="project-title">Document Scanner</a>
+                    <p class="project-description">
+                        A simple document scanner application written in python using open-cv and some principles of computer vision.
+                    </p>
+                </div>
+                <div class="tech-project-card" data-tech="web">
+                    <div class="project-status completed">
+                        <div class="status-indicator status-completed"></div>
+                        <span>COMPLETED</span>
+                    </div>
+                    <a href="https://github.com/ArnabSingha200228/YOLO_RPI_KAFKA" target="_blank" class="project-title">YOLO in IoT and Kafka</a>
+                    <p class="project-description">
+                        Object detection using YOLO in a Qemu emulated Raspberry pi and sending the detected images to remote machine through Kafka.
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
-    <footer class="bg-dark text-light text-center py-3 mt-5">
-        &copy; 2025 Arnab Singha | All Rights Reserved
+    </section>
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="container">
+            <div class="tech-section-header fade-in">
+                <h2>&lt;CONNECT_WITH_ME&gt;</h2>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="contact-info fade-in stagger-1">
+                        <div class="contact-item">
+                            <i class="bi bi-envelope-fill"></i>
+                            <span>arnabsingha200228@gmail.com</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="bi bi-telephone-fill"></i>
+                            <span>+91 8159942638</span>
+                        </div>
+                        <div class="contact-item">
+                            <i class="bi bi-geo-alt-fill"></i>
+                            <span>Midnapore, West Bengal, India</span>
+                        </div>
+                    </div>
+                    <div class="social-icons fade-in stagger-2">
+                        <a href="https://github.com/ArnabSingha200228/" target="_blank" class="social-icon">
+                            <i class="bi bi-github"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/arnab-singha-66934b235" target="_blank" class="social-icon">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                        <a href="https://instagram.com/arnab__s" target="_blank" class="social-icon">
+                            <i class="bi bi-instagram"></i>
+                        </a>
+                        <a href="https://www.facebook.com/share/14hmkNvVg1/" target="_blank" class="social-icon">
+                            <i class="bi bi-facebook"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <footer class="fade-in">
+        <div class="container">
+            <p>&copy; 2025 Arnab Singha | All Rights Reserved</p>
+        </div>
     </footer>
+    <!-- Project Modals -->
+    <div class="modal fade project-modal" id="edgebotModal" tabindex="-1" aria-labelledby="edgebotModalLabel" aria-hidden="true">
+        <div class="modal-dialog custom-modal" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="edgebotModalLabel">EdgeBot Navigator</h5>
+                    <button type="button" class="btn-close" aria-label="Close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <video autoplay muted loop>
+                        <source src="resource/edge.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade project-modal" id="flexiarmModal" tabindex="-1" aria-labelledby="flexiarmModalLabel" aria-hidden="true">
+        <div class="modal-dialog custom-modal" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="flexiarmModalLabel">FlexiArm Pro</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <video autoplay muted loop>
+                        <source src="resource/arm.mp4" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    // Matrix Rain Effect for entire page
+    function createMatrixRain() {
+        const matrixContainer = document.getElementById('matrixRain');
+        const chars = '01アイウエオカキクケコサシスセソタチツテトナニヌネノハヒフヘホマミムメモヤユヨラリルレロワヲンABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789$#&@%*!?';
+
+        function createChar() {
+            const char = document.createElement('div');
+            char.className = 'matrix-char';
+            char.textContent = chars[Math.floor(Math.random() * chars.length)];
+            char.style.left = Math.random() * 100 + '%';
+            char.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            char.style.animationDelay = Math.random() * 2 + 's';
+            matrixContainer.appendChild(char);
+
+            setTimeout(() => {
+                if (char.parentNode) {
+                    char.parentNode.removeChild(char);
+                }
+            }, 5000);
+        }
+
+        setInterval(createChar, 50);
+    }
+
+    // Fade-in Animation Observer
+    function initFadeInAnimations() {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(50px)';
+            el.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+            observer.observe(el);
+        });
+    }
+
+    // Smooth scrolling for navigation
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                window.scrollTo({
+                    top: target.offsetTop - 70,
+                    behavior: 'smooth'
+                });
+            }
+        });
+    });
+
+    // Project title hover effect
+    document.querySelectorAll('.project-title').forEach(title => {
+        title.addEventListener('mouseover', function() {
+            this.style.transform = 'translateX(5px)';
+        });
+        title.addEventListener('mouseout', function() {
+            this.style.transform = 'translateX(0)';
+        });
+    });
+
+    // Initialize when DOM is loaded
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(() => {
+            createMatrixRain();
+            initFadeInAnimations();
+        }, 500);
+    });
+    </script>
 </body>
-<script>
-var videoModal_edge = document.getElementById('videoModal_edge');
-var videoModal_arm = document.getElementById('videoModal_arm');
-
-videoModal_edge.addEventListener('hidden.bs.modal', function() {
-    var video = document.getElementById('popupVideo_edge');
-    video.pause();
-    video.currentTime = 0; // Reset to beginning
-});
-
-videoModal_arm.addEventListener('hidden.bs.modal', function() {
-    var video = document.getElementById('popupVideo_arm');
-    video.pause();
-    video.currentTime = 0; // Reset to beginning
-});
-</script>
 
 </html>
