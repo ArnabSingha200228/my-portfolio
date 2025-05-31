@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arnab Singha</title>
+    <title>Arnab Singha - Portfolio</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -65,7 +65,6 @@
 
         .matrix-char {
             position: absolute;
-/*            color: var(--matrix-green);*/
             color: white;
             font-family: 'JetBrains Mono', monospace;
             font-size: 18px;
@@ -701,27 +700,19 @@
             50% { opacity: 1; width: 200px; }
         }
 
-        /* Desktop modal size */
-        .project-modal .custom-modal {
-            width: 800px;
+        /* MODAL STYLES - Made responsive for mobile */
+        .project-modal .modal-dialog {
             max-width: 800px;
-            height: 600px;
-            max-height: 600px;
-            margin: auto;
+            margin: 1rem auto;
         }
-
-        /* Modal content structure */
+        
         .project-modal .modal-content {
-            height: 100%;
             background: var(--darker-bg);
             border: 1px solid var(--glass-border);
             border-radius: 15px;
             overflow: hidden;
-            display: flex;
-            flex-direction: column;
         }
 
-        /* Header */
         .project-modal .modal-header {
             height: 60px;
             border-bottom: 1px solid var(--glass-border);
@@ -729,7 +720,6 @@
             align-items: center;
         }
 
-        /* Title styling */
         .project-modal .modal-title {
             font-family: 'JetBrains Mono', monospace;
             font-weight: 700;
@@ -739,24 +729,21 @@
             background-clip: text;
         }
 
-        /* Modal body takes up remaining height */
         .project-modal .modal-body {
-            height: calc(100% - 60px);
             padding: 0;
             display: flex;
             justify-content: center;
             align-items: center;
+            min-height: 300px;
         }
 
-        /* Video scaling */
         .project-modal video {
-            max-width: 100%;
-            max-height: 100%;
+            width: 100%;
+            max-height: 70vh;
             object-fit: contain;
             border-radius: 0 0 15px 15px;
         }
 
-        /* Close button color */
         .project-modal .btn-close {
             filter: brightness(0) invert(1);
         }
@@ -767,7 +754,7 @@
             position: relative;
             display: inline-block;
             overflow: hidden;
-            min-height: 1.5em; /* Ensure consistent height */
+            min-height: 1.5em;
             padding: 20px;
         }
         
@@ -850,6 +837,21 @@
             .tech-projects-grid {
                 grid-template-columns: 1fr;
             }
+            
+            /* Mobile modal adjustments */
+            .project-modal .modal-dialog {
+                max-width: 95%;
+                margin: 0.5rem auto;
+            }
+            
+            .project-modal .modal-body {
+                min-height: 200px;
+                padding: 10px;
+            }
+            
+            .project-modal video {
+                max-height: 50vh;
+            }
         }
 
         @media (max-width: 576px) {
@@ -894,6 +896,19 @@
                 font-size: 0.75rem;
                 padding: 4px 10px;
             }
+            
+            /* Small mobile modal adjustments */
+            .project-modal .modal-header {
+                height: 50px;
+            }
+            
+            .project-modal .modal-title {
+                font-size: 1.1rem;
+            }
+            
+            .project-modal video {
+                max-height: 40vh;
+            }
         }
 
     </style>
@@ -903,7 +918,7 @@
     <div class="matrix-rain" id="matrixRain"></div>
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-            <a class="navbar-brand mx-2">Arnab Singha</a>
+            <a class="navbar-brand mx-2">&nbsp;Arnab Singha</a>
         </div>
     </nav>
     <!-- Hero Section -->
@@ -1214,15 +1229,15 @@
     </footer>
     <!-- Project Modals -->
     <div class="modal fade project-modal" id="edgebotModal" tabindex="-1" aria-labelledby="edgebotModalLabel" aria-hidden="true">
-        <div class="modal-dialog custom-modal" role="document">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="edgebotModalLabel">EdgeBot Navigator</h5>
                     <button type="button" class="btn-close" aria-label="Close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <video autoplay muted loop>
-                        <source src="resource/edge.mp4" type="video/mp4">
+                    <video controls autoplay muted playsinline>
+                        <source src="resource/edge.mp4">
                         Your browser does not support the video tag.
                     </video>
                 </div>
@@ -1230,14 +1245,14 @@
         </div>
     </div>
     <div class="modal fade project-modal" id="flexiarmModal" tabindex="-1" aria-labelledby="flexiarmModalLabel" aria-hidden="true">
-        <div class="modal-dialog custom-modal" role="document">
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="flexiarmModalLabel">FlexiArm Pro</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <video autoplay muted loop>
+                    <video controls autoplay muted playsinline>
                         <source src="resource/arm.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
