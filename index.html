@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Arnab Singha - Enhanced Portfolio</title>
+    <title>Arnab Singha</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -16,6 +16,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            outline: none;
         }
         
         :root {
@@ -64,13 +65,14 @@
 
         .matrix-char {
             position: absolute;
-            color: var(--matrix-green);
+/*            color: var(--matrix-green);*/
+            color: white;
             font-family: 'JetBrains Mono', monospace;
             font-size: 18px;
             font-weight: 600;
             animation: matrixFall linear infinite;
             opacity: 0.95;
-            text-shadow: 0 0 10px rgba(46, 204, 113, 0.95);
+            text-shadow: 0 0 10px var(--neon-green);
         }
 
         @keyframes matrixFall {
@@ -759,23 +761,34 @@
             filter: brightness(0) invert(1);
         }
 
-        /* --- Responsive styles for small screens --- */
-        @media (max-width: 767px) {
-            .project-modal .custom-modal {
-                width: 90vw;
-                height: 60vh;
-            }
-
-            .project-modal .modal-header {
-                height: 50px;
-            }
-
-            .project-modal .modal-body {
-                height: calc(100% - 50px);
-            }
+        /* Terminal Typing Effect - Fixed and Enhanced */
+        .terminal-header {
+            font-family: 'JetBrains Mono', monospace;
+            position: relative;
+            display: inline-block;
+            overflow: hidden;
+            min-height: 1.5em; /* Ensure consistent height */
+            padding: 20px;
         }
-
-
+        
+        /* Block cursor style */
+        .terminal-cursor {
+            display: inline-block;
+            height: 9px;
+            width: 0.7em;
+            background-color: var(--neon-green);
+            animation: blink 1s infinite;
+            margin-left: 4px;
+            vertical-align: bottom;
+            opacity: 1;
+            z-index: 10;
+            border-radius: 2px;
+        }
+        
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
 
         /* Responsive Design - Enhanced for Mobile */
         @media (max-width: 992px) {
@@ -890,7 +903,7 @@
     <div class="matrix-rain" id="matrixRain"></div>
     <nav class="navbar navbar-expand-lg">
         <div class="container-fluid">
-            <a class="navbar-brand mx-2" href="#">Arnab Singha</a>
+            <a class="navbar-brand mx-2">Arnab Singha</a>
         </div>
     </nav>
     <!-- Hero Section -->
@@ -904,7 +917,7 @@
                 </div>
                 <div class="col-lg-8">
                     <div class="hero-content fade-in stagger-1">
-                        <h1>Hi! Arnab Here</h1>
+                        <h1 id="terminal-hero" class="terminal-header">&nbsp;&nbsp;&nbsp;</h1>
                         <p>
                             I'm an M.Sc. Computer Science student at RKMVERI, Belur, and a passionate tech enthusiast from Midnapore, West Bengal. My expertise spans web development, machine learning, computer vision, DBMS and SQL, Arduino and IoT, with a keen interest in computer hardware, system-level technologies, robotics, cybersecurity, and ethical hacking. I love exploring how software and hardware interact to create innovative solutions. Whether it's building intelligent systems, enhancing security, or diving into embedded tech, I'm always eager to push the boundaries of technology and keep learning.
                         </p>
@@ -921,12 +934,12 @@
     <section class="py-5" id="education">
         <div class="container">
             <div class="tech-section-header fade-in">
-                <h2>&lt;MY_EDUCATION&gt;</h2>
+                <h2 id="terminal-education" class="terminal-header"></h2>
             </div>
             <div class="row g-4">
                 <div class="col-md-6 col-lg-4 fade-in stagger-1">
                     <div class="glass-card education-card">
-                        <img src="https://images.unsplash.com/photo-1523580494863-6f3031224c94?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="RKMVERI">
+                        <img src="resource/veri.jpg" class="card-img-top" alt="RKMVERI">
                         <div class="card-body">
                             <h5 class="card-title">
                                 Ramakrishna Mission Vivekananda Educational and Research Institute
@@ -959,7 +972,7 @@
                 </div>
                 <div class="col-md-6 col-lg-4 fade-in stagger-2">
                     <div class="glass-card education-card">
-                        <img src="https://images.unsplash.com/photo-1562774053-701939374585?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="Midnapore College">
+                        <img src="resource/mid.jpg" class="card-img-top" alt="Midnapore College">
                         <div class="card-body">
                             <h5 class="card-title">Midnapore College (Autonomous)</h5>
                             <p class="card-text">
@@ -997,7 +1010,7 @@
                 </div>
                 <div class="col-md-6 col-lg-4 fade-in stagger-3">
                     <div class="glass-card education-card">
-                        <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=500&q=80" class="card-img-top" alt="Midnapore Collegiate School">
+                        <img src="resource/coll.jpg" class="card-img-top" alt="Midnapore Collegiate School">
                         <div class="card-body">
                             <h5 class="card-title">Midnapore Collegiate School</h5>
                             <p class="card-text">
@@ -1013,7 +1026,7 @@
     <section class="py-5" id="skills">
         <div class="container">
             <div class="tech-section-header fade-in">
-                <h2>&lt;SKILLS_ACQUIRED&gt;</h2>
+                <h2 id="terminal-skills" class="terminal-header"></h2>
             </div>
             <div class="skills-grid fade-in">
                 <div class="skill-item stagger-1">
@@ -1061,7 +1074,7 @@
     <section class="py-5" id="projects" style="min-height: 100vh; display: flex; align-items: center;">
         <div class="container">
             <div class="tech-section-header fade-in">
-                <h2>&lt;MY_PROJECTS&gt;</h2>
+                <h2 id="terminal-projects" class="terminal-header"></h2>
             </div>
             <div class="tech-projects-grid">
                 <!-- Neutron Chatbot -->
@@ -1157,7 +1170,7 @@
     <section class="contact-section" id="contact">
         <div class="container">
             <div class="tech-section-header fade-in">
-                <h2>&lt;CONNECT_WITH_ME&gt;</h2>
+                <h2 id="terminal-contact" class="terminal-header"></h2>
             </div>
             <div class="row justify-content-center">
                 <div class="col-lg-8">
@@ -1195,7 +1208,8 @@
     </section>
     <footer class="fade-in">
         <div class="container">
-            <p>&copy; 2025 Arnab Singha | All Rights Reserved</p>
+            <p>Designed with <i class="bi bi-heart-fill text-success"></i> by Arnab Singha.</p>
+            &copy; 2025. All Rights Reserved.</p>
         </div>
     </footer>
     <!-- Project Modals -->
@@ -1302,11 +1316,78 @@
         });
     });
 
+    // Terminal typing effect for headers - Enhanced with block cursor
+    function initTerminalTyping() {
+        const terminalHeaders = [
+            { id: 'terminal-hero', text: 'Hi! Arnab Here' },
+            { id: 'terminal-education', text: 'MY_EDUCATION' },
+            { id: 'terminal-skills', text: 'SKILLS_ACQUIRED' },
+            { id: 'terminal-projects', text: 'MY_PROJECTS' },
+            { id: 'terminal-contact', text: 'CONNECT_WITH_ME' }
+        ];
+
+        // Create an observer for each header
+        const observers = [];
+
+        terminalHeaders.forEach((header) => {
+            const element = document.getElementById(header.id);
+            const text = header.text;
+
+            // Create an observer for this header
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Only run if not already typed
+                        if (!element.classList.contains('typed')) {
+                            typeText(element, text);
+                            element.classList.add('typed');
+                        }
+                    } else {
+                        // Reset when element leaves viewport
+                        element.classList.remove('typed');
+                    }
+                });
+            }, {
+                threshold: 0.5
+            });
+
+            // Observe the element
+            observer.observe(element);
+            observers.push(observer);
+        });
+
+        function typeText(element, text) {
+            // Clear existing content
+            element.textContent = '';
+
+            // Create cursor
+            const cursor = document.createElement('span');
+            cursor.className = 'terminal-cursor';
+            element.appendChild(cursor);
+
+            let index = 0;
+
+            function type() {
+                if (index < text.length) {
+                    const char = document.createTextNode(text.charAt(index));
+                    element.insertBefore(char, cursor);
+                    index++;
+                    setTimeout(type, 70);
+                } else {
+                    // Keep the cursor visible and blinking
+                    cursor.style.animation = 'blink 1s infinite';
+                }
+            }
+            type();
+        }
+    }
+
     // Initialize when DOM is loaded
     document.addEventListener('DOMContentLoaded', function() {
         setTimeout(() => {
             createMatrixRain();
             initFadeInAnimations();
+            initTerminalTyping();
         }, 500);
     });
     </script>
